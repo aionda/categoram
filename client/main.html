@@ -1,7 +1,48 @@
 <head>
-  <title>categoram-meteor</title>
+  <title>categoram</title>
 </head>
 
 <body>
   <h1>Categoram</h1>
 </body>
+
+<template name="home">
+  {{> categories}}
+  {{#if loading}}
+    <p>Loading...</p>
+  {{else}}
+    {{#if accounts.count}}
+    <div id="main">
+    <table>
+      <caption>Accounts you are following</caption>
+      {{#each accounts}}
+        {{> account}}
+      {{/each}}
+    </table>
+    </div>
+    {{/if}}
+  {{/if}}
+</template>
+
+<template name="account">
+  <tr>
+    <td class="image">
+    <a href="https://instagram.com/{{username}}" target="_blank">
+    <img src="{{profile_picture}}" alt={{username}} title={{username}}></a>
+    </td>
+    <td>
+      <p>{{{id}}}</p>
+      <p>{{{username}}}</p>
+      <p>{{full_name}}</p>
+    </td>
+  </tr>
+</template>  
+
+<template name="categories">
+  <ul>
+    <li><a href="/">Add New Category</a></li>
+    <li><a href="/fashion">Fashion</a></li>
+    <li><a href="/food">Food</a></li>
+    <li><a href="/travel">Travel</a></li>
+  </ul>
+</template>
