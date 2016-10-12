@@ -5,15 +5,16 @@ var CLIENT_SECRET = '';
 var code = '';
 var accessToken = '';
 
-Meteor.methods({
-	'getToken':function(){
-		return accessToken;
-	}
-});
+// Meteor.methods({
+// 	'getToken':function(){
+// 		return accessToken;
+// 	}
+// });
 
 Meteor.startup(() => {
   // code to run on server at startup
   Token = new Mongo.Collection('token');
+  Accounts = new Mongo.Collection('accounts_data');
 });
 
 Router.route('/', function() {
@@ -37,13 +38,15 @@ Router.route('/callback', function() {
       'code': code
     } 
   });
- 	if(Token.find().count() == 0){
+  console.log("new token: "+result.data.access_token);
+ 	// if(Token.find().count() == 0){
+	  	Token.remove({});
 	  	var user_data = {
 	  			'code':code,
 	  			'token':result.data.access_token
 	  			};
 		Token.insert(user_data);
-	}
+	// }
 	// accessToken = result.data.access_token;
 	this.response.writeHead(302, {
 	'Location': '/home' 
