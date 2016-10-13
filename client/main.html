@@ -3,19 +3,19 @@
 </head>
 
 <body>
-  <center>
-    <h1>Categoram</h1>
-  </center>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <a href="#" class="navbar-brand">Categoram</a>
+  </nav>
+  {{> categories_table}}
 </body>
 
 <template name="home">
-  {{> navbar}}
+ <h4>Uncategorized</h4>
   <div id=main>
   {{#if loading}}
     <p>Loading...</p>
   {{else}}
     {{#if accounts.count}}
-      <h2>Following</h2>
       <table>
         {{#each accounts}}
             {{> account}}
@@ -24,64 +24,44 @@
     {{/if}}
   {{/if}}
   </div>
-  <div id="context-menu">
-    <ul class="dropdown-menu" role="menu">
-      <li><a tabindex="-1" href="#">Action</a></li>
-      <li><a tabindex="-1" href="#">Separated link</a></li>
-  </ul>
-  </div>
 </template>
 
 <template name="account">
-<div id="context" data-toggle="context" data-target="#context-menu">
+<div id={{id}}>
   <tr>
-      <td class="image">
-          <a href="https://instagram.com/{{username}}" target="_blank">
-          <img src="{{profile_picture}}" alt={{username}} title={{username}}></a>
-      </td>
+    <td class="image">
+      <a href="https://instagram.com/{{username}}" target="_blank">
+      <img src="{{profile_picture}}" alt={{username}} title={{username}}></a>
+    </td>
   </tr>
+  <br>
+  <select class="form-control">
+    <option>Uncategorized</option>
+    <option>Fashion</option>
+    <option>Travel</option>
+  </select>
 </div>
 </template>  
 
-<!-- http://bootsnipp.com/snippets/featured/responsive-sidebar-menu -->
-<template name="navbar">
-<div id="navbar">
-<nav class="navbar navbar-inverse sidebar" role="navigation">
-    <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Categoram</a>
-    </div>
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories<span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-folder-open"></span></a>
-          <ul class="dropdown-menu forAnimate" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
-        <li ><a href="#">Log Out<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-log-out"></span></a></li>
-
-      </ul>
-    </div>
+<template name="categories_table">
+<div class="container-non-responsive col-md-2">
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Categories</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="col-md-1">Uncategorized</td>
+      </tr>
+      <tr>
+        <td class="col-md-1">Fashion</td>
+      </tr>
+      <tr>
+        <td class="col-md-1">Travel</td>
+      </tr>
+    </tbody>
+  </table>
   </div>
-</nav>
-<div class="main">
-<!-- Content Here -->
-</div>
-</div>
 </template>
